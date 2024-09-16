@@ -1,0 +1,13 @@
+services:
+  task-manager-app:
+    image: task-manager-app
+    build:
+      context: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./todo_project/todo_project/site.db:/app/todo_project/todo_project/site.db
+    environment:
+      - FLASK_APP=/app/todo_project/run.py
+    command: flask run --host=0.0.0.0
+
