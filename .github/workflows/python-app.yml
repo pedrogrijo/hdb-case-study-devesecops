@@ -60,8 +60,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Security check - Bandit
-        uses: ./
+      - name: Python security check using Bandit
+        uses: Joel-hanson/bandit-report-artifacts@V1      
         with:
           python-version: "3.9"
           project_path: todo_project
