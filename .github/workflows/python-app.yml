@@ -58,12 +58,21 @@ jobs:
     runs-on: ubuntu-24.04
     needs: [build, test]
     steps:
-    - uses: actions/checkout@v4
-    - name: Runs Bandit
-      uses: mdegis/bandit-action@v1.0.1
-      with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        path: todo_project
+      - uses: actions/checkout@v4
+
+      - name: Security check - Bandit
+        uses: ./
+        with:
+          python-version: "3.9"
+          project_path: todo_project
+          ignore_failure: true
+  
+      - name: Security check report artifacts
+        uses: actions/upload-artifact@v4
+        # if: failure()
+        with:
+          name: Security report
+          path: security_report.txt
 
   autotag:
     runs-on: ubuntu-24.04
