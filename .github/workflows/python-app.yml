@@ -62,7 +62,7 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Auto Tag
-      uses: Jorricks/action-python-autotagging@v1.0.1
+      uses: Jorricks/action-python-autotagging@1.0.1
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         default_bump: patch  # Default to bumping the patch version
