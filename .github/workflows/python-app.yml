@@ -67,12 +67,15 @@ jobs:
           python_version: "3.9"
           project_path: todo_project
           ignore_failure: true
+        
+      - name: List files after Bandit
+        run: ls -al
   
       - name: Security check report artifacts
         uses: actions/upload-artifact@v4
         with:
           name: Bandit security report
-          path: bandit_security_report.json
+          path: todo_project/bandit_security_report.json
           overwrite: true
 
   autotag:
