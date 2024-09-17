@@ -54,9 +54,23 @@ jobs:
         run: |
           pytest
 
-  autotag:
+  sast-bandit:
     runs-on: ubuntu-24.04
     needs: [build, test]
+    steps:
+    - uses: actions/checkout@v4
+    - name: Runs Bandit
+      uses: mdegis/bandit-action@v1.0
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        path: "."
+        level: high
+        confidence: high
+        exit_zero: true
+
+  autotag:
+    runs-on: ubuntu-24.04
+    needs: [build, test, sast-bandit]
     if: github.ref == 'refs/heads/master'
 
     steps:
@@ -68,3 +82,4 @@ jobs:
         path: todo_project/todo_project/__init__.py
         variable: tag_version
         prefix: v
+
