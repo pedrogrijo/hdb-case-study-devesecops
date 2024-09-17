@@ -67,6 +67,12 @@ jobs:
         level: high
         confidence: high
         exit_zero: true
+        format: "json"
+    - name: Upload Bandit Report
+      uses: actions/upload-artifact@v5
+      with:
+        name: bandit-report
+        path: bandit-output.json
 
   autotag:
     runs-on: ubuntu-24.04
