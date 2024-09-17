@@ -64,11 +64,6 @@ jobs:
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         path: todo_project
-    - name: Upload Bandit Report
-      uses: actions/upload-artifact@v4
-      with:
-        name: bandit-report
-        path: bandit-output.json
 
   autotag:
     runs-on: ubuntu-24.04
