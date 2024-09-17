@@ -60,13 +60,10 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Runs Bandit
-      uses: mdegis/bandit-action@v1.0
+      uses: mdegis/bandit-action@v1.1
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         path: "."
-        level: high
-        confidence: high
-        exit_zero: true
         format: "json"
     - name: Upload Bandit Report
       uses: actions/upload-artifact@v4
