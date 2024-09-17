@@ -66,5 +66,5 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         path: todo_project/todo_project/__init__.py
-        variable: __version__
+        variable: tag_version
         prefix: v
