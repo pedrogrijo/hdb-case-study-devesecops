@@ -64,7 +64,7 @@ jobs:
     - name: Auto Tag
       uses: Jorricks/action-python-autotagging@1.0.1
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        default_bump: patch  # Default to bumping the patch version
-        allowed_branches: master
-        release_branches: master
+        token: ${{ secrets.GITHUB_TOKEN }}
+        path: todo_project/todo_project/__init__.py
+        variable: __version__
+        prefix: v
