@@ -72,7 +72,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: Bandit security report
-          path: bandit_security_report.txt
+          path: bandit_security_report.json
 
   autotag:
     runs-on: ubuntu-24.04
