@@ -128,3 +128,9 @@ dmypy.json
 # Pyre type checker
 .pyre/
 todo_project/todo_project/site.db
+
+# SQLite DB file
+todo_project/todo_project/site.db
+
+
+
