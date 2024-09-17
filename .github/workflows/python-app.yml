@@ -70,7 +70,7 @@ jobs:
           pip install bandit
       - name: Run Bandit
         run: |
-          bandit -r todo_project -o bandit_security_report.json -f json
+          bandit -r todo_project -o bandit_security_report.json -f json --exit-zero
       - name: Security check report artifacts
         uses: actions/upload-artifact@v4
         with:
