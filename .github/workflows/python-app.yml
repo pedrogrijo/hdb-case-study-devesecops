@@ -139,7 +139,7 @@ jobs:
       - name: Run ZAP scan
         run: |
           mkdir -p zap-reports
-          docker run --network zap-network -v $(pwd)/zap-reports:/zap/wrk/ owasp/zap2docker-stable \
+          docker run --network zap-network -v $(pwd)/zap-reports:/zap/wrk/ zaproxy/zap-stable \
             zap-baseline.py -t http://task-manager-app:5000 -r zap-report.html
 
       - name: Upload ZAP Report
