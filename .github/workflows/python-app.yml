@@ -131,9 +131,6 @@ jobs:
       - name: List running containers
         run: docker ps -a
   
-      - name: Check application logs
-        run: docker logs task-manager-app
-  
       - name: Wait for application to be ready
         run: |
           for i in {1..30}; do
@@ -152,11 +149,17 @@ jobs:
           docker run --user root --network zap-network -v $(pwd)/zap-reports:/zap/wrk/ zaproxy/zap-stable \
             zap-baseline.py -t http://task-manager-app:5000 -r zap-report.html -I
   
+      - name: List zap-reports directory
+        run: |
+          pwd
+          ls -la
+          ls -la zap-reports       
+
       - name: Upload ZAP Report
         uses: actions/upload-artifact@v4
         with:
           name: ZAP Report
-          path: zap-report.html
+          path: zap-reports/zap-report.html
   
       - name: Stop and Remove Containers
         run: |
