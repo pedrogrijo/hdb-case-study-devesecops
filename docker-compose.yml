@@ -10,4 +10,23 @@ services:
     environment:
       - FLASK_APP=/app/todo_project/run.py
     command: flask run --host=0.0.0.0
+    networks:
+      - zap-network
+      
+  zap:
+    image: zaproxy/zap-stable
+    depends_on:
+      - task-manager-app
+    ports:
+      - "8080:8080"
+    environment:
+      - ZAP_MODE=daemon 
+    command: zap-baseline.py -P 8080 -t http://task-manager-app:5000 -r zap-report.html
+    networks:
+      - zap-network
+    volumes:
+      - ./zap-reports:/zap/wrk  # Store ZAP reports
 
+networks:
+  zap-network:
+    driver: bridge
