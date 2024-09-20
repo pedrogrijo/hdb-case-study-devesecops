@@ -40,14 +40,18 @@ def login():
     form = LoginForm()
     # After you submit the form
     if form.validate_on_submit():
+        username = form.username.data
+        password = form.password.data
         user = User.query.filter_by(username=form.username.data).first()
         # Check if the user exists and the password is valid
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user)
+            app.logger.info('User "%s" logged in successfully from %s', username, request.remote_addr)
             task_form = TaskForm()
             flash('Login Successfull', 'success')
             return redirect(url_for('all_tasks'))
         else:
+            app.logger.warning('Failed login attempt for user "%s" from %s', username, request.remote_addr)
             flash('Login Unsuccessful. Please check Username Or Password', 'danger')
     
     return render_template('login.html', title='Login', form=form)
