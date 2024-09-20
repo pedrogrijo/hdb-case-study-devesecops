@@ -161,6 +161,27 @@ jobs:
       - name: Remove Docker Network
         run: docker network rm zap-network
 
+  monitoring-fail2ban-test:
+    runs-on: ubuntu-latest
+    needs: [build, test]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Fail2ban
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fail2ban
+
+      - name: Configure Fail2ban Filter
+        run: |
+          sudo mkdir -p /etc/fail2ban/filter.d
+          sudo cp ./fail2ban/flask-app.conf /etc/fail2ban/filter.d/flask-app.conf
+
+      - name: Test Fail2ban Configuration
+        run: |
+          sudo fail2ban-regex ./logs/app.log /etc/fail2ban/filter.d/flask-app.conf
+
+
   autotag:
     runs-on: ubuntu-24.04
     needs: [build, test, sast-bandit, sast-dependency-check]
