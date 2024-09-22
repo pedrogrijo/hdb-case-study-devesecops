@@ -162,6 +162,7 @@ jobs:
         run: docker network rm zap-network
 
   monitoring-fail2ban-filter:
+    if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     needs: [build, test]
     steps:
