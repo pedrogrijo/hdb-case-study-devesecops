@@ -56,7 +56,6 @@ coverage.xml
 *.pot
 
 # Django stuff:
-*.log
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
@@ -109,6 +108,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+hdb-env/
 
 # Spyder project settings
 .spyderproject
