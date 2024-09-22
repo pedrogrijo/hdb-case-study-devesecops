@@ -164,7 +164,7 @@ jobs:
   monitoring-fail2ban-filter:
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
-    needs: [build, test]
+    needs: build
     steps:
       - uses: actions/checkout@v4
 
@@ -185,7 +185,7 @@ jobs:
 
   tag-release:
     runs-on: ubuntu-24.04
-    needs: [build, test, monitoring-fail2ban-filter]
+    needs: [build, monitoring-fail2ban-filter]
     if: github.ref == 'refs/heads/master'
 
     steps:
