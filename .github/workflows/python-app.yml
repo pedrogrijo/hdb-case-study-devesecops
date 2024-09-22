@@ -182,7 +182,7 @@ jobs:
   #         sudo fail2ban-regex ./logs/app.log /etc/fail2ban/filter.d/flask-app.conf
 
 
-  autotag:
+  tag-release:
     runs-on: ubuntu-24.04
     #needs: [build, test, sast-bandit, sast-dependency-check]
     needs: [build-lint, test]
@@ -190,7 +190,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Auto Tag
+    - name: Tag Release
       uses: Jorricks/action-python-autotagging@1.0.1
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
