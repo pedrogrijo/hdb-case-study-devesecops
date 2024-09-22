@@ -58,7 +58,7 @@ jobs:
   sast-bandit:
     if: github.ref == 'refs/heads/development'
     runs-on: ubuntu-24.04
-    needs: [build]
+    needs: build
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python 3.10
@@ -79,34 +79,34 @@ jobs:
           path: bandit_security_report.json
           overwrite: true
 
-  # sast-dependency-check:
-  #   if: github.ref == 'refs/heads/development'
-  #   runs-on: ubuntu-24.04
-  #   needs: [build, test]
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - name: Install Java 11
-  #       uses: actions/setup-java@v4
-  #       with:
-  #         distribution: 'zulu'
-  #         java-version: '11'
-  #     - name: Set up Python 3.9
-  #       uses: actions/setup-python@v5
-  #       with:
-  #         python-version: "3.9"
-  #     - name: Install OWASP Dependency Check
-  #       run: |
-  #         python -m pip install --upgrade pip
-  #         pip install dependency-check
-  #     - name: Run OWASP Dependency Check
-  #       run: |
-  #         dependency-check --disableAssembly -s . -o build --project "Task-Manager-using-Flask" \
-  #         --exclude ".git/**" --exclude ".venv/**" --exclude "**/__pycache__/**" --exclude ".tox/**"
-  #     - name: Upload OWASP Dependency Check report artifacts
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: Dependency Check report
-  #         path: build/dependency-check-report.html  
+  sast-dependency-check:
+    if: github.ref == 'refs/heads/development'
+    runs-on: ubuntu-24.04
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Java 11
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '11'
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+      - name: Install OWASP Dependency Check
+        run: |
+          python -m pip install --upgrade pip
+          pip install dependency-check
+      - name: Run OWASP Dependency Check
+        run: |
+          dependency-check --disableAssembly -s . -o build --project "Task-Manager-using-Flask" \
+          --exclude ".git/**" --exclude ".venv/**" --exclude "**/__pycache__/**" --exclude ".tox/**"
+      - name: Upload OWASP Dependency Check report artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: Dependency Check report
+          path: build/dependency-check-report.html  
 
   # zap:
   #   if: github.ref == 'refs/heads/staging'
