@@ -19,7 +19,7 @@ login_manager.login_message_category = 'danger'
 
 bcrypt = Bcrypt(app)
 
-tag_version = '2.0.0'
+tag_version = '1.1.0'
 
 # Set up logging
 if not app.debug:
