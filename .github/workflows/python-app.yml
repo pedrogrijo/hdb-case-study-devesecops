@@ -185,7 +185,7 @@ jobs:
   autotag:
     runs-on: ubuntu-24.04
     #needs: [build, test, sast-bandit, sast-dependency-check]
-    needs: [build, test]
+    needs: [build-lint, test]
     if: github.ref == 'refs/heads/master'
 
     steps:
